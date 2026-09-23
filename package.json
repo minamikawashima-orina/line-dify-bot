@@ -1,0 +1,18 @@
+{
+  "name": "line-dify-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LINE Messaging API と Dify API を連携するチャットボット",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "@line/bot-sdk": "^9.4.1",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "raw-body": "^2.5.2"
+  }
+}
