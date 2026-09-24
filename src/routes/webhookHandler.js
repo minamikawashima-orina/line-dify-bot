@@ -30,7 +30,9 @@ async function processEvent(event) {
     await replyMessage(
       replyToken,
       'エラーが発生しました。しばらくしてから再度お試しください。'
-    ).catch(() => {});
+    ).catch((fallbackError) => {
+      console.error('Failed to send fallback reply:', fallbackError.message);
+    });
   }
 }
 

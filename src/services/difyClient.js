@@ -32,6 +32,7 @@ async function sendMessageToDify({ message, userId, conversationId }) {
     // ステータスとメッセージだけを取り出して新しいErrorにする
     const status = error.response?.status ?? 'unknown';
     const detail = error.response?.data?.message || error.message;
+    console.error(`Dify API request failed (status: ${status}):`, detail);
     throw new Error(`Dify API request failed (status: ${status}): ${detail}`);
   }
 }

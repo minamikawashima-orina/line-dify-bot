@@ -23,10 +23,19 @@ function verifySignature(rawBody, signature) {
 }
 
 async function replyMessage(replyToken, text) {
-  await getClient().replyMessage(replyToken, {
-    type: 'text',
-    text,
-  });
+  try {
+    await getClient().replyMessage(replyToken, {
+      type: 'text',
+      text,
+    });
+  } catch (error) {
+    // error.originalErrorにはAuthorizationヘッダーが含まれるため、
+    // ステータスとレスポンス本文だけを取り出してログに出す
+    const status = error.statusCode ?? 'unknown';
+    const detail = error.originalError?.response?.data ?? error.message;
+    console.error(`LINE Reply API request failed (status: ${status}):`, detail);
+    throw new Error(`LINE Reply API request failed (status: ${status})`);
+  }
 }
 
 module.exports = { verifySignature, replyMessage };
